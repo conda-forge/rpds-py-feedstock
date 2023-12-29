@@ -3,11 +3,13 @@ About rpds-py-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/rpds-py-feedstock/blob/main/LICENSE.txt)
 
-Home: https://github.com/julian/rpds.py
+Home: https://github.com/crate-py/rpds
 
 Package license: MIT
 
 Summary: Python bindings to Rust's persistent data structures (rpds)
+
+Documentation: https://rpds.readthedocs.io
 
 Current build status
 ====================
