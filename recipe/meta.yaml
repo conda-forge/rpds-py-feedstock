@@ -1,4 +1,4 @@
-{% set version = "0.15.2" %}
+{% set version = "0.16.2" %}
 
 package:
   name: rpds-py
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/r/rpds-py/rpds_py-{{ version }}.tar.gz
-  sha256: 373b76eeb79e8c14f6d82cb1d4d5293f9e4059baec6c1b16dca7ad13b6131b39
+  sha256: 781ef8bfc091b19960fc0142a23aedadafa826bc32b433fdfe6fd7f964d7ef44
 
 build:
   number: 0
@@ -28,20 +28,27 @@ requirements:
     - python
 
 test:
+  source_files:
+    - tests
   imports:
     - rpds
   commands:
     - pip check
+    - coverage run --source=rpds -m pytest -vv --tb=long --color=yes
+    - coverage report --show-missing --skip-covered --fail-under=100
   requires:
+    - coverage
     - pip
+    - pytest
 
 about:
-  home: https://github.com/julian/rpds.py
+  home: https://github.com/crate-py/rpds
   summary: Python bindings to Rust's persistent data structures (rpds)
   license: MIT
   license_file:
     - LICENSE
     - THIRDPARTY.yml
+  doc_url: https://rpds.readthedocs.io
 
 extra:
   recipe-maintainers:
