@@ -1,4 +1,4 @@
-{% set version = "0.18.0" %}
+{% set version = "0.18.1" %}
 
 package:
   name: rpds-py
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/r/rpds-py/rpds_py-{{ version }}.tar.gz
-  sha256: 42821446ee7a76f5d9f71f9e33a4fb2ffd724bb3e7f93386150b61a43115788d
+  sha256: dc48b479d540770c811fbd1eb9ba2bb66951863e448efec2e2c102625328e92f
 
 build:
   number: 0
@@ -15,6 +15,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('rust') }}
     - cargo-bundle-licenses
     - python                                 # [build_platform != target_platform]
