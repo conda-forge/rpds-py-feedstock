@@ -1,4 +1,4 @@
-{% set version = "0.22.0" %}
+{% set version = "0.22.1" %}
 
 package:
   name: rpds-py
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/r/rpds-py/rpds_py-{{ version }}.tar.gz
-  sha256: 32de71c393f126d8203e9815557c7ff4d72ed1ad3aa3f52f6c7938413176750a
+  sha256: 157a023bded0618a1eea54979fe2e0f9309e9ddc818ef4b8fc3b884ff38fedd5
 
 build:
   number: 0
