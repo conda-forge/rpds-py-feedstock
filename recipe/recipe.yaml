@@ -1,0 +1,73 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: 0.23.0
+  maturin_version: ">=1.2,<2.0"
+
+package:
+  name: rpds-py
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/r/rpds-py/rpds_py-${{ version }}.tar.gz
+  sha256: ffac3b13182dc1bf648cde2982148dc9caf60f3eedec7ae639e05636389ebf5d
+
+build:
+  number: 0
+  skip: not (match(python, python_min) and is_abi3 == "true")
+  script:
+    file: build-rdps-py
+  python:
+    version_independent: true
+
+requirements:
+  build:
+    - ${{ compiler("c") }}
+    - ${{ compiler("rust") }}
+    - ${{ stdlib("c") }}
+    - cargo-bundle-licenses
+    - if: build_platform != target_platform
+      then:
+        - cross-python_${{ target_platform }}
+        - maturin ${{ maturin_version }}
+        - python
+  host:
+    - maturin ${{ maturin_version }}
+    - pip
+    - python
+    - python-abi3
+  run:
+    - python
+
+tests:
+  - python:
+      pip_check: true
+      python_version: ${{ python_min }}.*
+      imports: rpds
+  - files:
+      source:
+        - tests/
+    requirements:
+      run:
+        - coverage
+        - pip
+        - pytest
+        - python !=${{ python_min }}.*
+    script:
+      - pip check
+      - coverage run --source=rpds -m pytest -vv --tb=long --color=yes
+      - coverage report --show-missing --skip-covered --fail-under=100
+
+about:
+  summary: Python bindings to Rust's persistent data structures (rpds)
+  license: MIT
+  license_file:
+    - LICENSE
+    - THIRDPARTY.yml
+  homepage: https://github.com/crate-py/rpds
+  documentation: https://rpds.readthedocs.io
+
+extra:
+  recipe-maintainers:
+    - bollwyvl
