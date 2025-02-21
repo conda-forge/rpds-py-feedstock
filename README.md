@@ -9,7 +9,7 @@ Package license: MIT
 
 Summary: Python bindings to Rust's persistent data structures (rpds)
 
-Documentation: https://rpds.readthedocs.io
+Documentation: https://rpds.readthedocs.io/
 
 Current build status
 ====================
