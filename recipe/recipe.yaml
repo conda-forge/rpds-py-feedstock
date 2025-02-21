@@ -15,11 +15,8 @@ source:
 
 build:
   number: 0
-  skip: not (match(python, python_min ~ ".*") and is_abi3 == "true")
   script:
     file: build-rdps-py
-  python:
-    version_independent: true
 
 requirements:
   build:
@@ -36,14 +33,12 @@ requirements:
     - maturin ${{ maturin_version }}
     - pip
     - python
-    - python-abi3
   run:
     - python
 
 tests:
   - python:
       pip_check: true
-      python_version: ${{ python_min }}.*
       imports: rpds
   - files:
       source:
@@ -53,7 +48,6 @@ tests:
         - coverage
         - pip
         - pytest
-        - python !=${{ python_min }}.*
     script:
       - pip check
       - coverage run --source=rpds -m pytest -vv --tb=long --color=yes
