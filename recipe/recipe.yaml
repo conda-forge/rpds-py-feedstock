@@ -54,7 +54,7 @@ tests:
       - coverage report --show-missing --skip-covered --fail-under=100
 
 about:
-  summary: Python bindings to Rust's persistent data structures (rpds)
+  summary: "Python bindings to Rust's persistent data structures (rpds)"
   license: MIT
   license_file:
     - LICENSE
