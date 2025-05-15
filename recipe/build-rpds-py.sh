@@ -15,7 +15,7 @@ rustc --version
 
 mkdir -p "${CARGO_HOME}"
 
-"${PYTHON}" -m pip install -vv . --no-deps --no-build-isolation
+"${PYTHON}" -m pip install -vv . --no-deps --no-build-isolation --disable-pip-version-check
 
 cargo-bundle-licenses \
     --format yaml \

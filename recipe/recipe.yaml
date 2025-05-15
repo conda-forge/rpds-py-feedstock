@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "0.24.0"
+  version: "0.25.0"
   maturin_min: "1.2"
   maturin_max: "2.0"
 
@@ -12,12 +12,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/r/rpds-py/rpds_py-${{ version }}.tar.gz
-  sha256: 772cc1b2cd963e7e17e6cc55fe0371fb9c704d63e44cacec7b9b7f523b78919e
+  sha256: 4d97661bf5848dd9e5eb7ded480deccf9d32ce2cd500b88a26acbf7bd2864985
 
 build:
   number: 0
   script:
-    file: build-rdps-py
+    file: build-rpds-py
 
 requirements:
   build:
@@ -47,11 +47,9 @@ tests:
     requirements:
       run:
         - coverage
-        - pip
         - pytest
     script:
-      - pip check
-      - coverage run --source=rpds -m pytest -vv --tb=long --color=yes
+      - coverage run --source=rpds --branch -m pytest -vv --tb=long --color=yes
       - coverage report --show-missing --skip-covered --fail-under=100
 
 about:
