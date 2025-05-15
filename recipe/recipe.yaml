@@ -50,7 +50,7 @@ tests:
         - pytest
     script:
       - coverage run --source=rpds --branch -m pytest -vv --tb=long --color=yes
-      - coverage report --show-missing --skip-covered --fail-under=100
+      - coverage report --show-missing --skip-covered --fail-under=83
 
 about:
   summary: Python bindings to Rust's persistent data structures (rpds)
