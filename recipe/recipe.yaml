@@ -15,7 +15,7 @@ source:
   sha256: 26a1c73171d10b7acccbded82bf6a586ab8203601e565badc74bbbf8bc5a10f8
 
 build:
-  number: 0
+  number: 1
   script:
     file: build-rpds-py
 
