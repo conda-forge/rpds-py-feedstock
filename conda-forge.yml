@@ -2,8 +2,6 @@ azure:
   free_disk_space: true
 bot:
   inspection: hint-grayskull
-build_platform:
-  osx_arm64: osx_64
 conda_build:
   error_overlinking: true
 conda_build_tool: rattler-build
@@ -12,8 +10,8 @@ github:
   branch_name: main
   tooling_branch_name: main
 provider:
-  linux_aarch64: azure
-  linux_ppc64le: azure
+  linux_aarch64: default
+  linux_ppc64le: default
+  osx_arm64: default
 shellcheck:
   enabled: true
-test: native_and_emulated
