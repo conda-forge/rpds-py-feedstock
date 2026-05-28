@@ -31,7 +31,7 @@ if !errorlevel! neq 0 exit /b !errorlevel!
 echo Creating environment
 call "%MICROMAMBA_EXE%" create --yes --root-prefix "%MAMBA_ROOT_PREFIX%" --prefix "%MINIFORGE_HOME%" ^
     --channel conda-forge ^
-    pip rattler-build conda-forge-ci-setup=4 "conda-build>=24.1"
+    pip rattler-build conda-forge-ci-setup=4 "conda-build>=26.3"
 if !errorlevel! neq 0 exit /b !errorlevel!
 echo Removing %MAMBA_ROOT_PREFIX%
 del /S /Q "%MAMBA_ROOT_PREFIX%" >nul
@@ -61,11 +61,6 @@ if !errorlevel! neq 0 exit /b !errorlevel!
 if EXIST LICENSE.txt (
     echo Copying feedstock license
     copy LICENSE.txt "recipe\\recipe-scripts-license.txt"
-)
-if NOT [%HOST_PLATFORM%] == [%BUILD_PLATFORM%] (
-    if [%CROSSCOMPILING_EMULATOR%] == [] (
-        set "EXTRA_CB_OPTIONS=%EXTRA_CB_OPTIONS% --test skip"
-    )
 )
 
 if NOT [%flow_run_id%] == [] (

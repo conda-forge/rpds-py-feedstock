@@ -2,9 +2,8 @@
 schema_version: 1
 
 context:
-  version: "0.30.0"
-  maturin_min: "1.9"
-  maturin_max: "2.0"
+  version: "2026.5.1"
+  python_min: "3.11"
 
 package:
   name: rpds-py
@@ -12,12 +11,30 @@ package:
 
 source:
   url: https://pypi.org/packages/source/r/rpds-py/rpds_py-${{ version }}.tar.gz
-  sha256: dd8ff7cf90014af0c0f787eea34794ebf6415242ee1d6fa91eaba725cc441e84
+  sha256: 07b24fea40541e28570e5b795a4a38fbdcd12550c06bd0748005ecc8116ca256
 
 build:
   number: 0
+  skip: match(python, "<" ~ python_min)
   script:
-    file: build-rpds-py
+    env:
+      CARGO_PROFILE_RELEASE_STRIP: symbols
+      CARGO_PROFILE_RELEASE_LTO: fat
+      CARGO: cargo-auditable-wrapper${{ ".bat" if win }}
+      PYTHONIOENCODING: utf-8
+      PYTHONLEGACYTEXTENCODING: utf-8
+    content:
+      - if: win
+        then:
+          # for `path too long` errors
+          - set CARGO_HOME=c:\.cg
+          - md %CARGO_HOME%
+          - copy "%RECIPE_DIR%\cargo-auditable-wrapper.bat" "%BUILD_PREFIX%\Library\bin\cargo-auditable-wrapper.bat"
+        else:
+          - cp "${RECIPE_DIR}/cargo-auditable-wrapper.sh" "${BUILD_PREFIX}/bin/cargo-auditable-wrapper"
+          - chmod 755 "${BUILD_PREFIX}/bin/cargo-auditable-wrapper"
+      - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+      - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 
 requirements:
   build:
@@ -25,13 +42,9 @@ requirements:
     - ${{ compiler("rust") }}
     - ${{ stdlib("c") }}
     - cargo-bundle-licenses
-    - if: build_platform != target_platform
-      then:
-        - cross-python_${{ target_platform }}
-        - maturin >=${{ maturin_min }},<${{ maturin_max }}
-        - python
+    - cargo-auditable
   host:
-    - maturin >=${{ maturin_min }},<${{ maturin_max }}
+    - maturin >=1.9,<2.0
     - pip
     - python
   run:
@@ -58,7 +71,8 @@ about:
   license_file:
     - LICENSE
     - THIRDPARTY.yml
-  homepage: https://github.com/crate-py/rpds
+  homepage: https://pypi.org/project/rpds-py
+  repository: https://github.com/crate-py/rpds
   documentation: https://rpds.readthedocs.io
 
 extra:
