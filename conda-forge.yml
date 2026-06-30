@@ -1,7 +1,5 @@
-azure:
-  free_disk_space: true
 bot:
-  inspection: hint-grayskull
+  inspection: hint-all
 conda_build:
   error_overlinking: true
 conda_build_tool: rattler-build
@@ -15,3 +13,5 @@ provider:
   osx_arm64: default
 shellcheck:
   enabled: true
+workflow_settings:
+  free_disk_space: max
