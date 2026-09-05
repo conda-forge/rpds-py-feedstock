@@ -3,19 +3,17 @@ schema_version: 1
 
 context:
   version: "2026.6.3"
-  python_min: "3.11"
 
 package:
   name: rpds-py
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/r/rpds-py/rpds_py-${{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/r/rpds-py/rpds_py-${{ version }}.tar.gz
   sha256: 1cebd1337c242e4ec2293e541f712b2da849b29f48f0c293684b71c0632625d4
 
 build:
-  number: 1
-  skip: match(python, "<" ~ python_min)
+  number: 2
   script:
     env:
       CARGO_PROFILE_RELEASE_STRIP: symbols
