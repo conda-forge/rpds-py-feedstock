@@ -14,7 +14,7 @@ source:
   sha256: 1cebd1337c242e4ec2293e541f712b2da849b29f48f0c293684b71c0632625d4
 
 build:
-  number: 1
+  number: 2
   skip: match(python, "<" ~ python_min)
   script:
     env:
