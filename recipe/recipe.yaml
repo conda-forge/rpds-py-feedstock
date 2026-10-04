@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "2026.6.3"
+  version: "2026.9.1"
 
 package:
   name: rpds-py
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/r/rpds-py/rpds_py-${{ version }}.tar.gz
-  sha256: 1cebd1337c242e4ec2293e541f712b2da849b29f48f0c293684b71c0632625d4
+  sha256: 4793ef7f78268b124b73fa933440f01d258bbae01de9fa53e9080c9ab0425a12
 
 build:
-  number: 2
+  number: 0
   script:
     env:
       CARGO_PROFILE_RELEASE_STRIP: symbols
